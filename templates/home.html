@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <div class="summary-box">
+    <h3>Go Mini Wiki — File‑Based, Framework‑Free, Standard Go</h3>
+    <p>A lightweight wiki powered only by Go’s built‑in tools.</p>
+    <p>Pages are stored as text files, routed via regex handlers, and rendered with Go templates — 
+a small experiment in building real functionality with zero external packages.</p>
+    </div>
+
+    <title>Go Mini Wiki</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>📚 Pages created so far...</h1>
+    <ul>
+        {{range .}}
+        <li style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/view/{{.}}">{{.}}</a>
+            <form action="/delete" method="POST" style="margin: 0;">
+                <input type="hidden" name="title" value="{{.}}">
+                <button type="submit" onclick="return confirm('Delete {{.}}?');">🗑️ Delete</button>
+            </form>
+        </li>
+        {{end}}
+    </ul>
+    <form action="/create" method="POST">
+        <label for="title">Create a new page:</label>
+        <input type="text" id="title" name="title" required>
+        <button type="submit">Go</button>
+    </form>
+</body>
+</html>
+
